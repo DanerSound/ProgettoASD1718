@@ -12,6 +12,10 @@ public class NodoLF<T> {
 		this.father = null;
 		this.childs = null;
 	}
+	
+	public String toString() {
+		return inf.toString();
+	}
 
 	public T getInf() {
 		return inf;
