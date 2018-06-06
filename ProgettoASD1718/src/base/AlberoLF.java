@@ -1,6 +1,6 @@
 package base;
 
-import java.util.Iterator;
+
 import java.util.LinkedList;
 
 public class AlberoLF<T> {
@@ -21,9 +21,11 @@ public class AlberoLF<T> {
 			tmpNode.setChilds(new LinkedList<>());
 			tmpNode.getChilds().add(root);
 			root = tmpNode;
+			numNodes++;
 			return root;
 		} else {
 			root = tmpNode;
+			numNodes++;
 			return root;
 		}
 	}
@@ -34,8 +36,10 @@ public class AlberoLF<T> {
 			father.setChilds(new LinkedList<>());
 			father.getChilds().add(tmpChild);
 			tmpChild.setFather(father);
+			numNodes++;
 		}else {
 			father.getChilds().add(tmpChild);
+			numNodes++;
 		}
 		return tmpChild;
 	}
