@@ -1,6 +1,5 @@
 package base;
 
-
 import java.util.LinkedList;
 
 public class AlberoLF<T> {
@@ -31,19 +30,60 @@ public class AlberoLF<T> {
 	}
 
 	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
-		NodoLF<T> tmpChild= new NodoLF<>(inf);
-		if(father.getChilds()==null) {
+		NodoLF<T> tmpChild = new NodoLF<>(inf);
+		if (father.getChilds() == null) {
 			father.setChilds(new LinkedList<>());
 			father.getChilds().add(tmpChild);
 			tmpChild.setFather(father);
 			numNodes++;
-		}else {
+		} else {
+			tmpChild.setFather(father);
 			father.getChilds().add(tmpChild);
 			numNodes++;
 		}
 		return tmpChild;
 	}
+	
+	public String printInfo(NodoLF<T>Node) {
+		NodoLF<T> tmp = searchNode(Node);
+		return tmp.getInf().toString();	
+	}
 
+	public NodoLF<T> searchNode(NodoLF<T> Node) {
+		LinkedList<NodoLF<T>> searchList = new LinkedList<>();
+		NodoLF<T> current=null;	
+		if (Node.equals(root)) {
+			return root;
+		} else {
+			searchList.addAll(root.getChilds());
+			while (!searchList.isEmpty()) {
+				current=searchList.getFirst();
+				if (Node==current) {
+					return current;
+				} else {
+				searchList.removeFirst();
+					try {
+						searchList.addAll(current.getChilds());
+					} catch (Exception e) {
+						
+					}
+				}
+			}
+		}
+		return current;
+	}
+	
+	public String getFatherOf(NodoLF<T> Node) {
+		NodoLF<T>tmp=searchNode(Node);
+		String father=tmp.getFather().getInf().toString();
+		return father;
+	}
+	
+	public void changeInf(NodoLF<T>Node,T newInf) {
+		NodoLF<T> tmp= searchNode(Node);
+		tmp.setInf(newInf);
+	}
+	
 	public NodoLF<T> getRoot() {
 		return root;
 	}
