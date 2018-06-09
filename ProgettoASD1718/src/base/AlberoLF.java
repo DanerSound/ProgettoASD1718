@@ -13,7 +13,7 @@ public class AlberoLF<T> {
 		this.numNodes = 0;
 	}
 
-	public NodoLF<T> addRoot(T inf) {
+	public NodoLF<T> setRoot(T inf) {
 		NodoLF<T> tmpNode = new NodoLF<T>(inf);
 		if (root != null) {
 			root.setFather(tmpNode);
@@ -43,47 +43,55 @@ public class AlberoLF<T> {
 		}
 		return tmpChild;
 	}
-	
-	public String printInfo(NodoLF<T>Node) {
+
+	public String printInfo(NodoLF<T> Node) {
 		NodoLF<T> tmp = searchNode(Node);
-		return tmp.getInf().toString();	
+		return tmp.getInf().toString();
 	}
 
 	public NodoLF<T> searchNode(NodoLF<T> Node) {
 		LinkedList<NodoLF<T>> searchList = new LinkedList<>();
-		NodoLF<T> current=null;	
+		NodoLF<T> current = null;
 		if (Node.equals(root)) {
 			return root;
 		} else {
 			searchList.addAll(root.getChilds());
 			while (!searchList.isEmpty()) {
-				current=searchList.getFirst();
-				if (Node==current) {
+				current = searchList.getFirst();
+				if (Node == current) {
 					return current;
 				} else {
-				searchList.removeFirst();
+					searchList.removeFirst();
 					try {
 						searchList.addAll(current.getChilds());
 					} catch (Exception e) {
-						
+
 					}
 				}
 			}
 		}
 		return current;
 	}
-	
+
 	public String getFatherOf(NodoLF<T> Node) {
-		NodoLF<T>tmp=searchNode(Node);
-		String father=tmp.getFather().getInf().toString();
-		return father;
+		try {
+			NodoLF<T> tmp = searchNode(Node);
+			return tmp.getFather().getInf().toString();
+		} catch (Exception e) {
+			System.out.println("Error 404:Node not found!");
+			return null;
+		}
 	}
-	
-	public void changeInf(NodoLF<T>Node,T newInf) {
-		NodoLF<T> tmp= searchNode(Node);
-		tmp.setInf(newInf);
+
+	public void changeInf(NodoLF<T> Node, T newInf) {
+		try {
+			NodoLF<T> tmp = searchNode(Node);
+			tmp.setInf(newInf);
+		} catch (Exception e) {
+			System.out.println("Error 404:Node not found!");
+		}
 	}
-	
+
 	public NodoLF<T> getRoot() {
 		return root;
 	}

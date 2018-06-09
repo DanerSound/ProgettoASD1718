@@ -22,6 +22,10 @@ public class NodoLF<T> {
 		}
 		return level;
 	}
+//	@Override
+//	public void equals() {
+//		
+//	}
 
 	public T getInf() {
 		return inf;
