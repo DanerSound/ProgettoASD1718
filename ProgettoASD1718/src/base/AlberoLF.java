@@ -39,11 +39,11 @@ public class AlberoLF<T> {
 			numNodes++;
 			return tmpChild;
 		} else {
-				tmpChild.setFather(father);
-				father.getChilds().add(tmpChild);
-				numNodes++;			
+			tmpChild.setFather(father);
+			father.getChilds().add(tmpChild);
+			numNodes++;
 			return tmpChild;
-			}
+		}
 	}
 
 	public String printInfo(NodoLF<T> Node) {
@@ -73,6 +73,49 @@ public class AlberoLF<T> {
 			}
 		}
 		return current;
+	}
+
+	// public String toString(){
+	// Node tmp=head.getNextNode();
+	// String t=" [";
+	// while(tmp!=tail){
+	//
+	// if(tmp==getFirst()) {
+	// t=tmp.intToString()+t;
+	// }
+	// else {
+	// t=t+" "+tmp.intToString();
+	// }
+	// tmp=tmp.getNextNode();
+	// }
+	// t=t+ " " + tail.intToString()+"] ";
+	// return t;
+	// }
+
+	public String printTree() {
+		String tree,current = null;
+		NodoLF<T> tmp = root;
+		
+		LinkedList<NodoLF<T>> printList=new LinkedList<>();
+		String simb = "[ ";
+
+		if (root.getChilds().isEmpty()) {
+			tree = root.getInf().toString() + simb + " ]";
+		} else {
+			tree = tmp.getInf().toString() +simb;
+			printList.addAll(tmp.getChilds());
+			tmp=tmp.getChilds();
+			while(!printList.isEmpty()) {
+				current=printList.getFirst().getInf().toString();
+				tree=tree+current;
+				if(printList.getFirst())
+				
+			}
+			
+
+		}
+
+		return tree;
 	}
 
 	public String getFatherOf(NodoLF<T> Node) {
