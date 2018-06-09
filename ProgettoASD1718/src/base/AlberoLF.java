@@ -31,17 +31,19 @@ public class AlberoLF<T> {
 
 	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
 		NodoLF<T> tmpChild = new NodoLF<>(inf);
+
 		if (father.getChilds() == null) {
 			father.setChilds(new LinkedList<>());
 			father.getChilds().add(tmpChild);
 			tmpChild.setFather(father);
 			numNodes++;
+			return tmpChild;
 		} else {
-			tmpChild.setFather(father);
-			father.getChilds().add(tmpChild);
-			numNodes++;
-		}
-		return tmpChild;
+				tmpChild.setFather(father);
+				father.getChilds().add(tmpChild);
+				numNodes++;			
+			return tmpChild;
+			}
 	}
 
 	public String printInfo(NodoLF<T> Node) {
