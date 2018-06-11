@@ -1,5 +1,6 @@
 package base;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class AlberoLF<T> {
@@ -75,48 +76,46 @@ public class AlberoLF<T> {
 		return current;
 	}
 
-	// public String toString(){
-	// Node tmp=head.getNextNode();
-	// String t=" [";
-	// while(tmp!=tail){
+	// public String printTree() {
+	// String tree, currentFamily = null;
+	// NodoLF<T> tmp = root;
+	// LinkedList<NodoLF<T>> printList = new LinkedList<>();
+	// String simb = "[ ";
 	//
-	// if(tmp==getFirst()) {
-	// t=tmp.intToString()+t;
+	// if (tmp.getChilds().isEmpty()) {
+	// tree = tmp.getInf().toString() + simb + " ]";
+	// } else {
+	// tree = tmp.getInf().toString() + simb;
+	// printList.addAll(tmp.getChilds());
+	// while (!printList.isEmpty()) {
+	// if (printList.getFirst().getChilds() == null) {
+	// currentFamily = printList.getFirst().getInf().toString();
+	// tree = tree + currentFamily + simb + "]";
+	// printList.removeFirst();
+	// } else {
+	// currentFamily = printList.getFirst().getInf().toString();
+	// tree = tree + currentFamily + simb;
+	// printList.removeFirst();
 	// }
-	// else {
-	// t=t+" "+tmp.intToString();
 	// }
-	// tmp=tmp.getNextNode();
+	// tree = tree + " ]";
 	// }
-	// t=t+ " " + tail.intToString()+"] ";
-	// return t;
+	// return tree;
 	// }
 
-	public String printTree() {
-		String tree,current = null;
-		NodoLF<T> tmp = root;
-		
-		LinkedList<NodoLF<T>> printList=new LinkedList<>();
-		String simb = "[ ";
-
-		if (root.getChilds().isEmpty()) {
-			tree = root.getInf().toString() + simb + " ]";
-		} else {
-			tree = tmp.getInf().toString() +simb;
-			printList.addAll(tmp.getChilds());
-			tmp=tmp.getChilds();
-			while(!printList.isEmpty()) {
-				current=printList.getFirst().getInf().toString();
-				tree=tree+current;
-				if(printList.getFirst())
-				
-			}
-			
-
-		}
-
-		return tree;
-	}
+	// public String tree(NodoLF<T> node) {
+	// String tree;
+	// String simb="[ ";
+	//
+	// tree=node.getInf().toString()+simb;
+	// while(node.getChilds()!=null) {
+	// node=node.getChilds().getFirst();
+	// tree=tree+node.getInf().toString()+simb;
+	// tree=tree(node);
+	// }
+	// tree=tree + " ]";
+	// return tree;
+	// }
 
 	public String getFatherOf(NodoLF<T> Node) {
 		try {
