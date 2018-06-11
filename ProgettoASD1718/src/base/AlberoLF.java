@@ -117,8 +117,24 @@ public class AlberoLF<T> {
 		if (this.root == null) {
 			return 0;
 		} else {
-			return this._branch_depth(this.root, 1);
+			return this._branch_depth(this.root, 0);
 		}
+	}
+
+	public int getLeafs() {
+		int numLeaf = 0;
+		LinkedList<NodoLF<T>> tmp = new LinkedList<>();
+		tmp.add(root);
+		while (!tmp.isEmpty()) {
+			if (tmp.get(0).has_children()) {
+				tmp.addAll(tmp.get(0).getChilds());
+				tmp.remove(0);
+			} else {
+				numLeaf++;
+				tmp.remove(0);
+			}
+		}
+		return numLeaf;
 	}
 
 	public String _print_tree(NodoLF<T> nodo) {
@@ -126,11 +142,41 @@ public class AlberoLF<T> {
 		for (NodoLF<T> n : nodo.getChilds()) {
 			name += this._print_tree(n) + ",";
 		}
+		if (name.endsWith(",")) {
+			name = name.substring(0, name.length() - 1);
+		}
 		return name + "]";
 	}
 
 	public String print_tree() {
-		return "" + this.root.toString() + this._print_tree(this.root);
+		return "" + this._print_tree(this.root);
 	}
 
+	public LinkedList<T> visitaDFS() {
+		LinkedList<NodoLF<T>> stack = new LinkedList<NodoLF<T>>();
+		LinkedList<T> infoList = new LinkedList<T>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			NodoLF<T> temp = stack.pop();
+			infoList.add(temp.getInf());
+			for (int i = temp.getChilds().size() - 1; i >= 0; i--) {
+				stack.push(temp.getChilds().get(i));
+			}
+		}
+		return infoList;
+	}
+
+	public LinkedList<T> visitaBFS() {
+		LinkedList<NodoLF<T>> stack = new LinkedList<NodoLF<T>>();
+		LinkedList<T> infoList = new LinkedList<T>();
+		stack.addFirst(root);
+		while (!stack.isEmpty()) {
+			NodoLF<T> temp = stack.removeLast();
+			infoList.add(temp.getInf());
+			for (int i = 0; i <= temp.getChilds().size() - 1; i++) {
+				stack.addFirst(temp.getChilds().get(i));
+			}
+		}
+		return infoList;
+	}
 }
