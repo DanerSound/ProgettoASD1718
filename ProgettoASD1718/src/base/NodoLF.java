@@ -23,10 +23,11 @@ public class NodoLF<T> {
         }
         return level;
     }
-//	@Override
-//	public void equals() {
-//		
-//	}
+
+    @Override
+    public boolean equals(Object obj) {
+    	return ((NodoLF<T>)obj).getInf() == this.getInf();
+    }
 
     public T getInf() {
         return inf;

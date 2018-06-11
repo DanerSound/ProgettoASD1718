@@ -3,11 +3,12 @@ package base;
 public class Main {
 
     public static void main(String[] args) {
-        AlberoLF<String> t = new AlberoLF<>(3);
+        AlberoLF<String> t = new AlberoLF<>();
         NodoLF<String> r = t.setRoot("root");
         NodoLF<String> a = t.addChilds(r, "a");
         NodoLF<String> b = t.addChilds(r, "b");
         NodoLF<String> c = t.addChilds(r, "c");
+        
         NodoLF<String> d = t.addChilds(b, "d");
         NodoLF<String> e = t.addChilds(d, "e");
 
