@@ -43,7 +43,7 @@ public class AlberoLF<T> {
 					father.getChilds().add(tmpChild);
 					numNodes++;
 				} else {
-					System.out.println("Error: Not enought space"+tmpChild.getInf().toString());
+					System.out.println("Error: Not enought space: "+tmpChild.getInf().toString());
 				}
 		}
 		return tmpChild;
