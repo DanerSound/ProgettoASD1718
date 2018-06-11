@@ -70,7 +70,7 @@ public class AlberoLF<T> {
 					try {
 						searchList.addAll(current.getChilds());
 					} catch (Exception e) {
-
+						System.out.println("Error 404:Node not found!");
 					}
 				}
 			}
