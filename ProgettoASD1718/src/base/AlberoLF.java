@@ -29,24 +29,9 @@ public class AlberoLF<T> {
 		}
 	}
 
-//	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
-//		NodoLF<T> tmpChild = new NodoLF<>(inf);
-//
-//		if (father.getChilds() == null) {
-//			father.setChilds(new LinkedList<>());
-//			father.getChilds().add(tmpChild);
-//			tmpChild.setFather(father);
-//			numNodes++;
-//		} else {
-//			tmpChild.setFather(father);
-//			father.getChilds().add(tmpChild);
-//			numNodes++;
-//		}
-//		return tmpChild;
-//	}
-
-	public NodoLF<T> addChilds2(NodoLF<T> father, T inf) {
+	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
 		NodoLF<T> tmpChild = new NodoLF<>(inf);
+
 		if (father.getChilds() == null) {
 			father.setChilds(new LinkedList<>());
 			father.getChilds().add(tmpChild);
@@ -54,18 +39,11 @@ public class AlberoLF<T> {
 			numNodes++;
 			return tmpChild;
 		} else {
-			try {
-				int tmp = father.getChilds().size();
-				if (tmp <= this.arieta) {
-					tmpChild.setFather(father);
-					father.getChilds().add(tmpChild);
-					numNodes++;
-					return tmpChild;
-				}
-			} catch (Exception e) {
-				System.out.println("non ce spazio");
+				tmpChild.setFather(father);
+				father.getChilds().add(tmpChild);
+				numNodes++;			
+			return tmpChild;
 			}
-		}
 	}
 
 	public String printInfo(NodoLF<T> Node) {
