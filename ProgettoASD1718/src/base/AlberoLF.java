@@ -29,23 +29,7 @@ public class AlberoLF<T> {
 		}
 	}
 
-	// public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
-	// NodoLF<T> tmpChild = new NodoLF<>(inf);
-	//
-	// if (father.getChilds() == null) {
-	// father.setChilds(new LinkedList<>());
-	// father.getChilds().add(tmpChild);
-	// tmpChild.setFather(father);
-	// numNodes++;
-	// } else {
-	// tmpChild.setFather(father);
-	// father.getChilds().add(tmpChild);
-	// numNodes++;
-	// }
-	// return tmpChild;
-	// }
-
-	public NodoLF<T> addChilds2(NodoLF<T> father, T inf) {
+	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
 		NodoLF<T> tmpChild = new NodoLF<>(inf);
 		if (father.getChilds() == null) {
 			father.setChilds(new LinkedList<>());
@@ -59,7 +43,7 @@ public class AlberoLF<T> {
 					father.getChilds().add(tmpChild);
 					numNodes++;
 				} else {
-					System.out.println("non ce spazio per :"+tmpChild.getInf().toString());
+					System.out.println("Error: Not enought space"+tmpChild.getInf().toString());
 				}
 		}
 		return tmpChild;
