@@ -49,6 +49,22 @@ public class AlberoLF<T> {
 		return tmpChild;
 	}
 
+	public int numbersOfLeaf() {
+		LinkedList<NodoLF<T>> leafsCounter = new LinkedList<>();
+		NodoLF<T> current = root;
+
+		while (numNodes != 1) {
+			if (current.getChilds()== null) {
+				leafsCounter.add(current);
+				numNodes--;
+			} else {
+				current = current.getChilds().getFirst();
+				numNodes--;
+			}
+		}
+		return leafsCounter.size();
+	}
+
 	public String printInfo(NodoLF<T> Node) {
 		NodoLF<T> tmp = searchNode(Node);
 		return tmp.getInf().toString();
