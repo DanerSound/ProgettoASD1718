@@ -1,6 +1,5 @@
 package base;
 
-
 import java.util.LinkedList;
 
 public class AlberoLF<T> {
@@ -14,7 +13,7 @@ public class AlberoLF<T> {
 		this.numNodes = 0;
 	}
 
-	public NodoLF<T> addRoot(T inf) {
+	public NodoLF<T> setRoot(T inf) {
 		NodoLF<T> tmpNode = new NodoLF<T>(inf);
 		if (root != null) {
 			root.setFather(tmpNode);
@@ -31,17 +30,71 @@ public class AlberoLF<T> {
 	}
 
 	public NodoLF<T> addChilds(NodoLF<T> father, T inf) {
-		NodoLF<T> tmpChild= new NodoLF<>(inf);
-		if(father.getChilds()==null) {
+		NodoLF<T> tmpChild = new NodoLF<>(inf);
+		if (father.getChilds() == null) {
 			father.setChilds(new LinkedList<>());
 			father.getChilds().add(tmpChild);
 			tmpChild.setFather(father);
 			numNodes++;
-		}else {
-			father.getChilds().add(tmpChild);
-			numNodes++;
+		} else {
+				int tmp = father.getChilds().size();
+				if (tmp != this.arieta) {
+					tmpChild.setFather(father);
+					father.getChilds().add(tmpChild);
+					numNodes++;
+				} else {
+					System.out.println("Error: Not enought space"+tmpChild.getInf().toString());
+				}
 		}
 		return tmpChild;
+	}
+
+	public String printInfo(NodoLF<T> Node) {
+		NodoLF<T> tmp = searchNode(Node);
+		return tmp.getInf().toString();
+	}
+
+	public NodoLF<T> searchNode(NodoLF<T> Node) {
+		LinkedList<NodoLF<T>> searchList = new LinkedList<>();
+		NodoLF<T> current = null;
+		if (Node.equals(root)) {
+			return root;
+		} else {
+			searchList.addAll(root.getChilds());
+			while (!searchList.isEmpty()) {
+				current = searchList.getFirst();
+				if (Node == current) {
+					return current;
+				} else {
+					searchList.removeFirst();
+					try {
+						searchList.addAll(current.getChilds());
+					} catch (Exception e) {
+						System.out.println("Error 404:Node not found!");
+					}
+				}
+			}
+		}
+		return current;
+	}
+
+	public String getFatherOf(NodoLF<T> Node) {
+		try {
+			NodoLF<T> tmp = searchNode(Node);
+			return tmp.getFather().getInf().toString();
+		} catch (Exception e) {
+			System.out.println("Error 404:Node not found!");
+			return null;
+		}
+	}
+
+	public void changeInf(NodoLF<T> Node, T newInf) {
+		try {
+			NodoLF<T> tmp = searchNode(Node);
+			tmp.setInf(newInf);
+		} catch (Exception e) {
+			System.out.println("Error 404:Node not found!");
+		}
 	}
 
 	public NodoLF<T> getRoot() {

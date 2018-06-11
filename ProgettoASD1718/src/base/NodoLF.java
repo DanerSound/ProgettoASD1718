@@ -13,6 +13,20 @@ public class NodoLF<T> {
 		this.childs = null;
 	}
 
+	public int getLevel() {
+		int level = 0;
+		NodoLF<T> current = this.getFather();
+		while (current != null) {
+			level++;
+			current = current.getFather();
+		}
+		return level;
+	}
+//	@Override
+//	public void equals() {
+//		
+//	}
+
 	public T getInf() {
 		return inf;
 	}
