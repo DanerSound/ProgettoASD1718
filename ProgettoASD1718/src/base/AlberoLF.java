@@ -7,11 +7,6 @@ public class AlberoLF<T> {
 	private NodoLF<T> root;
 	private int numNodes;
 
-	public AlberoLF() {
-		this.root = null;
-		this.numNodes = 0;
-	}
-
 	public NodoLF<T> setRoot(T inf) {
 		NodoLF<T> tmpNode = new NodoLF<T>(inf);
 		if (root != null) {
@@ -94,89 +89,86 @@ public class AlberoLF<T> {
 		return numNodes;
 	}
 
-	public void setNumNodes(int numNodes) {
-		this.numNodes = numNodes;
-	}
-
-	private int _branch_depth(NodoLF<T> startnode, int n) {
-		if (!startnode.has_children()) {
-			return n;
-		}
-		int max_depth = n;
-		int tmp_depth = 0;
-		for (NodoLF<T> node : startnode.getChilds()) {
-			tmp_depth = this._branch_depth(node, n + 1);
-			if (tmp_depth > max_depth) {
-				max_depth = tmp_depth;
-			}
-		}
-		return max_depth;
-	}
-
 	public int getDepth() {
 		if (this.root == null) {
 			return 0;
 		} else {
-			return this._branch_depth(this.root, 0);
+			return branchLevel(root, 0);
 		}
+	}
+
+	private int branchLevel(NodoLF<T> startnode, int currentLevel) {
+		if (!startnode.has_children()) {
+			return currentLevel;
+		}
+		int maxDepth = currentLevel;
+		int tmpDepth = 0;
+		for (NodoLF<T> node : startnode.getChilds()) {
+			tmpDepth = branchLevel(node, currentLevel + 1);
+			if (tmpDepth > maxDepth) {
+				maxDepth = tmpDepth;
+			}
+		}
+		return maxDepth;
 	}
 
 	public int getLeafs() {
 		int numLeaf = 0;
-		LinkedList<NodoLF<T>> tmp = new LinkedList<>();
-		tmp.add(root);
-		while (!tmp.isEmpty()) {
-			if (tmp.get(0).has_children()) {
-				tmp.addAll(tmp.get(0).getChilds());
-				tmp.remove(0);
+		LinkedList<NodoLF<T>> nodesWithSons = new LinkedList<>();
+		nodesWithSons.add(root);
+		while (!nodesWithSons.isEmpty()) {
+			if (nodesWithSons.get(0).has_children()) {
+				nodesWithSons.addAll(nodesWithSons.get(0).getChilds());
+				nodesWithSons.remove(0);
 			} else {
 				numLeaf++;
-				tmp.remove(0);
+				nodesWithSons.remove(0);
 			}
 		}
 		return numLeaf;
 	}
 
-	public String _print_tree(NodoLF<T> nodo) {
-		String name = nodo.getInf() + "[";
+	public String printTree() {
+		return currentTree(root);
+	}
+
+	private String currentTree(NodoLF<T> nodo) {
+		String name = nodo.getInf() + "[ ";
 		for (NodoLF<T> n : nodo.getChilds()) {
-			name += this._print_tree(n) + ",";
+			name += currentTree(n) + ",";
 		}
 		if (name.endsWith(",")) {
 			name = name.substring(0, name.length() - 1);
 		}
-		return name + "]";
+		return name + " ]";
 	}
 
-	public String print_tree() {
-		return "" + this._print_tree(this.root);
-	}
-
-	public LinkedList<T> visitaDFS() {
+	public LinkedList<T> visitDFS() {
 		LinkedList<NodoLF<T>> stack = new LinkedList<NodoLF<T>>();
 		LinkedList<T> infoList = new LinkedList<T>();
 		stack.push(root);
 		while (!stack.isEmpty()) {
-			NodoLF<T> temp = stack.pop();
-			infoList.add(temp.getInf());
-			for (int i = temp.getChilds().size() - 1; i >= 0; i--) {
-				stack.push(temp.getChilds().get(i));
+			NodoLF<T> currentNode = stack.pop();
+			infoList.add(currentNode.getInf());
+			for (int i = currentNode.getChilds().size() - 1; i >= 0; i--) {
+				stack.push(currentNode.getChilds().get(i));
 			}
 		}
 		return infoList;
 	}
 
-	public LinkedList<T> visitaBFS() {
-		LinkedList<NodoLF<T>> stack = new LinkedList<NodoLF<T>>();
+	public LinkedList<T> visitBFS() {
+		LinkedList<NodoLF<T>> queue = new LinkedList<NodoLF<T>>();
 		LinkedList<T> infoList = new LinkedList<T>();
-		stack.addFirst(root);
-		while (!stack.isEmpty()) {
-			NodoLF<T> temp = stack.removeLast();
-			infoList.add(temp.getInf());
-			for (int i = 0; i <= temp.getChilds().size() - 1; i++) {
-				stack.addFirst(temp.getChilds().get(i));
+		queue.addFirst(root);
+		while (!queue.isEmpty()) {
+			NodoLF<T> currentNode = queue.removeLast();
+			infoList.add(currentNode.getInf());
+			for (int i = 0; i <= currentNode.getChilds().size() - 1; i++) {
+				queue.addFirst(currentNode.getChilds().get(i));
 			}
 		}
 		return infoList;
 	}
+
 }

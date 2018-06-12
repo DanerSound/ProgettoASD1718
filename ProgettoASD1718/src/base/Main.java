@@ -14,11 +14,11 @@ public class Main {
 
 		NodoLF<String> c1 = t.addChilds(c, "c1");
 
-		System.out.println(" print_tree : " + t.print_tree());
+		System.out.println(" print_tree : " + t.printTree());
 		
 		NodoLF<String> newroot= t.setRoot("newroot");
 
-		System.out.println(" print_tree : " + t.print_tree());
+		System.out.println(" print_tree : " + t.printTree());
 		
 		System.out.println(" La radice dell'albero è: "+t.getRoot());
 
@@ -30,15 +30,15 @@ public class Main {
 		
 		System.out.println("l'informazione di c1 è "+t.searchNode(c1).getInf());
 		
-		t.changeInf(c1, "newc1");
+		t.changeInf(c1, " newc1 ");
 		
 		System.out.println("la nuova info è "+t.searchNode(c1).getInf());
 		
 		System.out.println("il padre ci root è "+t.getFatherOf(r));
 		
-		System.out.println(" visita DFS :" + t.visitaDFS());
+		System.out.println(" visita DFS :" + t.visitDFS());
 		
-		System.out.println(" visita BFS :" + t.visitaBFS());
+		System.out.println(" visita BFS :" + t.visitBFS());
 
 		System.out.println(" numero delle foglie : "+t.getLeafs());
 	}
