@@ -140,7 +140,7 @@ public class AlberoLF<T> {
 		if (name.endsWith(",")) {
 			name = name.substring(0, name.length() - 1);
 		}
-		return name + " ]";
+		return name + "]";
 	}
 
 	public LinkedList<T> visitDFS() {
