@@ -1,4 +1,7 @@
 package base;
+/*	AUTORE: Andre Cristhian Barreto Donayre  MATRICOLA: 5364116
+ * 
+ */
 
 import java.util.LinkedList;
 
